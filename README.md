@@ -8,9 +8,7 @@
 
 
 
-若依(**[umi-react-admin-lowcode](https://github.com/chengqy010612/umi-react-admin-lowcode)**)是一套全部开源的快速开发平台,基于ruoyi-react项目，
-
-主项目(admin),子项目(low-code-engine)页面设计器，通过微前端(qiankun)集成
+umi-react-admin-lowcode 是一套全部开源的快速开发平台,基于ruoyi-react项目，主项目(admin),子项目(low-code-engine)页面设计器，通过微前端(qiankun)集成
 
 
 
@@ -49,7 +47,7 @@
 
 演示地址：暂时没有
 
-https://gitee.com/whiteshader/ruoyi-cloud-vben/blob/master/ruoyi-react-demo-2023-04-27.gif
+
 
 ## 开发注意事项
 
@@ -159,3 +157,7 @@ http://doc.ruoyi.vip/ruoyi-vue/document/hjbs.html#nginx%E9%85%8D%E7%BD%AE
 
 
 #### 页面设计
+
+![](https://github.com/chengqy010612/umi-react-admin-lowcode/blob/main/image/editor.png)
+
+![](https://github.com/chengqy010612/umi-react-admin-lowcode/blob/main/image/page1.png)
