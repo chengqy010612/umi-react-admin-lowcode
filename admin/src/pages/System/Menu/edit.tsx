@@ -7,12 +7,13 @@ import {
   ProFormTreeSelect,
   ProFormSelect,
 } from '@ant-design/pro-components';
-import { Form, Modal} from 'antd';
+import { Form, Input, Modal } from 'antd';
 import { useIntl, FormattedMessage } from '@umijs/max';
 import { DataNode } from 'antd/es/tree';
 import { createIcon } from '@/utils/IconUtil';
 import { DictValueEnumObj } from '@/components/DictTag';
 import IconSelector from '@/components/IconSelector';
+import JsonEditor from '@/components/JsonEditor/index';
 
 export type MenuFormData = Record<string, unknown> & Partial<API.System.Menu>;
 
@@ -27,7 +28,6 @@ export type MenuFormProps = {
 };
 
 const MenuForm: React.FC<MenuFormProps> = (props) => {
-
   const [form] = Form.useForm();
 
   const [menuTypeId, setMenuTypeId] = useState<any>('M');
@@ -39,6 +39,7 @@ const MenuForm: React.FC<MenuFormProps> = (props) => {
   useEffect(() => {
     form.resetFields();
     setMenuIconName(props.values.icon);
+    setMenuTypeId(props.values.menuType)
     form.setFieldsValue({
       menuId: props.values.menuId,
       menuName: props.values.menuName,
@@ -91,7 +92,8 @@ const MenuForm: React.FC<MenuFormProps> = (props) => {
         grid={true}
         submitter={false}
         layout="horizontal"
-        onFinish={handleFinish}>
+        onFinish={handleFinish}
+      >
         <ProFormDigit
           name="menuId"
           label={intl.formatMessage({
@@ -114,7 +116,7 @@ const MenuForm: React.FC<MenuFormProps> = (props) => {
             id: 'system.menu.parent_id',
             defaultMessage: '上级菜单',
           })}
-          params={{menuTree}}
+          params={{ menuTree }}
           request={async () => {
             return menuTree;
           }}
@@ -122,11 +124,13 @@ const MenuForm: React.FC<MenuFormProps> = (props) => {
           rules={[
             {
               required: true,
-              message: <FormattedMessage id="请输入父菜单编号！" defaultMessage="请输入父菜单编号！" />,
+              message: (
+                <FormattedMessage id="请输入父菜单编号！" defaultMessage="请输入父菜单编号！" />
+              ),
             },
           ]}
-          fieldProps = {{
-            defaultValue: 0
+          fieldProps={{
+            defaultValue: 0,
           }}
         />
         <ProFormRadio.Group
@@ -206,8 +210,8 @@ const MenuForm: React.FC<MenuFormProps> = (props) => {
               message: <FormattedMessage id="请输入显示顺序！" defaultMessage="请输入显示顺序！" />,
             },
           ]}
-          fieldProps = {{
-            defaultValue: 1
+          fieldProps={{
+            defaultValue: 1,
           }}
         />
         <ProFormRadio.Group
@@ -227,11 +231,13 @@ const MenuForm: React.FC<MenuFormProps> = (props) => {
           rules={[
             {
               required: false,
-              message: <FormattedMessage id="请输入是否为外链！" defaultMessage="请输入是否为外链！" />,
+              message: (
+                <FormattedMessage id="请输入是否为外链！" defaultMessage="请输入是否为外链！" />
+              ),
             },
           ]}
-          fieldProps = {{
-            defaultValue: '1'
+          fieldProps={{
+            defaultValue: '1',
           }}
         />
         <ProFormText
@@ -267,7 +273,32 @@ const MenuForm: React.FC<MenuFormProps> = (props) => {
             },
           ]}
         />
-        <ProFormText
+
+        <ProForm.Item
+          name="query"
+          label={intl.formatMessage({
+            id: 'system.menu.query',
+            defaultMessage: '路由参数',
+          })}
+          // labelCol={{ md:{span:12} , xl: {span:12}  }}
+          placeholder="请输入路由参数"
+          hidden={menuTypeId !== 'C'}
+          rules={[
+            {
+              required: false,
+              message: <FormattedMessage id="请输入路由参数！" defaultMessage="请输入路由参数！" />,
+            },
+          ]}
+        >
+          <JsonEditor
+            value={form.getFieldValue('query')}
+            onChange={(e) => {
+              form.setFieldValue('query', JSON.stringify(e));
+            }}
+          ></JsonEditor>
+        </ProForm.Item>
+
+        {/* <ProFormText
           name="query"
           label={intl.formatMessage({
             id: 'system.menu.query',
@@ -282,7 +313,7 @@ const MenuForm: React.FC<MenuFormProps> = (props) => {
               message: <FormattedMessage id="请输入路由参数！" defaultMessage="请输入路由参数！" />,
             },
           ]}
-        />
+        /> */}
         <ProFormText
           name="perms"
           label={intl.formatMessage({
@@ -318,8 +349,8 @@ const MenuForm: React.FC<MenuFormProps> = (props) => {
               message: <FormattedMessage id="请输入是否缓存！" defaultMessage="请输入是否缓存！" />,
             },
           ]}
-          fieldProps = {{
-            defaultValue: 0
+          fieldProps={{
+            defaultValue: 0,
           }}
         />
         <ProFormRadio.Group
@@ -338,8 +369,8 @@ const MenuForm: React.FC<MenuFormProps> = (props) => {
               message: <FormattedMessage id="请输入显示状态！" defaultMessage="请输入显示状态！" />,
             },
           ]}
-          fieldProps = {{
-            defaultValue: '0'
+          fieldProps={{
+            defaultValue: '0',
           }}
         />
         <ProFormRadio.Group
@@ -358,8 +389,8 @@ const MenuForm: React.FC<MenuFormProps> = (props) => {
               message: <FormattedMessage id="请输入菜单状态！" defaultMessage="请输入菜单状态！" />,
             },
           ]}
-          fieldProps = {{
-            defaultValue: '0'
+          fieldProps={{
+            defaultValue: '0',
           }}
         />
       </ProForm>

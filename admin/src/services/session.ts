@@ -13,7 +13,6 @@ export function setRemoteMenu(data: any) {
   remoteMenu = data;
 }
 
-
 const componentMap = {
   PageRender: '@/components/PageRender/index.tsx',
 };
@@ -119,9 +118,34 @@ export async function getRouters(): Promise<any> {
   return request('/api/system/menu/getRouters');
 }
 
+//  后端query字符串解析后的格式
+type RoutersMenuItemQuery = {
+  route: {
+    [key: string]: any;
+  };
+  lowcode: {
+    schema: {
+      [key: string]: any;
+    };
+  };
+};
+
+// 转换为前端需要的路由格式
 export function convertCompatRouters(childrens: API.RoutersMenuItem[]): any[] {
   return childrens.map((item: API.RoutersMenuItem) => {
-    return {
+    // 扩展属性 通过json设置
+    let extendProps;
+    if (
+      item.query &&
+      JSON.parse(item.query) &&
+      (JSON.parse(item.query) as RoutersMenuItemQuery).route
+    ) {
+      extendProps = JSON.parse(item.query).route;
+    } else {
+      extendProps = {};
+    }
+
+    const res = {
       path: item.path,
       icon: createIcon(item.meta.icon),
       //  icon: item.meta.icon,
@@ -129,10 +153,15 @@ export function convertCompatRouters(childrens: API.RoutersMenuItem[]): any[] {
       routes: item.children ? convertCompatRouters(item.children) : undefined,
       hideChildrenInMenu: item.hidden,
       hideInMenu: item.hidden,
-      component: item.component,
+      // component: item.component,
       authority: item.perms,
       query: item.query,
+      ...extendProps,
     };
+    if(item.component){
+      res.component = item.component
+    }
+    return res
   });
 }
 

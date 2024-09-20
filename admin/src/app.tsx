@@ -78,19 +78,19 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
       params: {
         userId: initialState?.currentUser?.userId,
       },
-      // request: async () => {
-      //   if (!initialState?.currentUser?.userId) {
-      //     return [];
-      //   }
-      //   // console.log('get menus')
-      //   // initialState.currentUser 中包含了所有用户信息
-      //   // console.log('get routers')
-      //   // setInitialState((preInitialState) => ({
-      //   //   ...preInitialState,
-      //   //   menus,
-      //   // }));
-      //   return getRemoteMenu();
-      // },
+      request: async () => {
+        if (!initialState?.currentUser?.userId) {
+          return [];
+        }
+        // console.log('get menus')
+        // initialState.currentUser 中包含了所有用户信息
+        // console.log('get routers')
+        // setInitialState((preInitialState) => ({
+        //   ...preInitialState,
+        //   menus,
+        // }));
+        return getRemoteMenu();
+      },
     },
     footerRender: () => <Footer />,
     onPageChange: () => {

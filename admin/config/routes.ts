@@ -98,24 +98,29 @@ export default [
     name: 'test',
     path: '/test',
     routes: [
-      {
-        name: 'test',
-        path: '/test/test',
-        component: '../components/PageRender/index.tsx',
-      },
-      {
-        name: '编辑表',
-        path: '/test/test',
-        component: './Tool/Gen/edit',
-      },
+  //     {
+  //       name: 'test',
+  //       path: '/test/test',
+  //       component: '../components/PageRender/index.tsx',
+  //     },
+  //     {
+  //       name: '编辑表',
+  //       path: '/test/test',
+  //       component: './Tool/Gen/edit',
+  //     },
     ]
   },
   {
-    name: ' 低代码平台',
-    path: '/low-code-engine',
-    microApp: 'low-code-engine',
-    target: '_blank',
-    headerRender: false,
-    menuRender: false,
+    name: 'lowcode',
+    path: '/lowcode',
+    routes: []
   },
+  // {
+  //   name: ' 低代码平台',
+  //   path: '/low-code-engine',
+  //   microApp: 'low-code-engine',
+  //   target: '_blank',
+  //   headerRender: false,
+  //   menuRender: false,
+  // },
 ];
