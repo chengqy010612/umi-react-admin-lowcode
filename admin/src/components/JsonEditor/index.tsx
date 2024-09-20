@@ -12,7 +12,7 @@ import { isString } from 'lodash';
 //   return <Editor value={props.value} onChange={props.onChange } />;
 // }
 
-const JsonEditorFormItem = ({ value, onChange }) => {
+const JsonEditorFormItem = ({ value = "{}", onChange }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   // const [jsonValue, setJsonValue] = useState(value || {});
   const [jsonValue, setJsonValue] = useState(value || {}); // 格式化 JSON
@@ -26,7 +26,7 @@ const JsonEditorFormItem = ({ value, onChange }) => {
   const handleOk = () => {
     setIsModalVisible(false);
     // setInputValue(JSON.stringify(jsonValue, null, 2)); // 同步 JSON 编辑器的值到 Input
-    onChange(isJSON(jsonValue) ? JSON.stringify(jsonValue) : jsonValue)
+    onChange(isJSON(jsonValue) ? jsonValue : JSON.stringify(jsonValue) )
   };
 
 

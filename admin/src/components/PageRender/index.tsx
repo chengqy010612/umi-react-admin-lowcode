@@ -20,7 +20,6 @@ function customizer(objValue: [], srcValue: []) {
 const Renderer = (props) => {
   const { page } = props;
   const [data, setData] = useState({});
-  const params = useParams();
   const { pathname } = useLocation();
   let menuList = getRemoteMenu();
 
@@ -30,7 +29,7 @@ const Renderer = (props) => {
 
   let projectSchema;
   if (targetItem.query) {
-    projectSchema = JSON.parse(targetItem.query);
+    projectSchema = JSON.parse(targetItem.query)?.lowcode?.schema;
   }
 
   async function init() {

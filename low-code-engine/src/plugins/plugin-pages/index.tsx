@@ -30,9 +30,9 @@ const buildTreeMenu = (menu) => {
     return {
       title: item.menuName,
       key: item.menuId,
-      schema: item.query ? JSON.parse(item.query) : null,
+      query: item.query ? JSON.parse(item.query) : null,
       children: buildTreeMenu(item.children || []),
-      raw:item
+      raw: item,
     };
   });
 };
@@ -86,6 +86,10 @@ let treeData: TreeDataNode[] = [
   },
 ];
 
+const setSchema = (menuItem,schema) => {
+ 
+}
+
 const PagesPlugin = (ctx: IPublicModelPluginContext) => {
   return {
     async init() {
@@ -99,7 +103,7 @@ const PagesPlugin = (ctx: IPublicModelPluginContext) => {
       const res2 = await actions.getState().getMenuList();
       const menuList = res2.data.filter((item) => item.menuType !== 'F');
       // console.log('menu', res.data, listBuildTree(menuList, 'menuId', 'parentId'));
-      const treeList = listBuildTree(menuList, 'menuId', 'parentId')
+      const treeList = listBuildTree(menuList, 'menuId', 'parentId');
       treeData = buildTreeMenu(treeList);
       console.log('treeData: ', treeData);
       // globalState.getMenuList()
@@ -132,13 +136,18 @@ const PagesPlugin = (ctx: IPublicModelPluginContext) => {
       //   });
       //   return arr;
       // }
+
+      // 当前编辑页面
       let menuItem = {};
+      let menuItemQuery = {};
       const onSelect = async (keys, event) => {
-        console.log('keys, event: ', keys, event.node.schema);
+        // console.log('keys, event: ', keys, event.node.schema);
         const key = keys[0];
-        let schema = event.node.schema;
+        if (event.node.query) {
+          menuItemQuery = event.node.query;
+        }
+        let schema = event.node.query?.lowcode?.schema;
         menuItem = event.node.raw;
-        //   console.log('selected', key);
         //   // 保存在 config 中用于引擎范围其他插件使用
         config.set('scenarioName', key);
         config.set('scenarioDisplayName', key);
@@ -149,27 +158,28 @@ const PagesPlugin = (ctx: IPublicModelPluginContext) => {
         }
         project.importSchema(schema as any);
         project.simulatorHost?.rerender();
-        //   let scenarioSchema = await getProjectSchemaFromDb(key);
-        //   if (!scenarioSchema) {
-        //     scenarioSchema = await getProjectSchema();
-        //     let schema = scenarioSchema?.componentsTree?.[0];
-        //     if (schema) {
-        //       scenarioSchema.componentsTree[0]['meta'] = {title: key, locator: key, router: '/' + key};
-        //     }
-        //   }
-        //   // 加载schema
-        //   project.importSchema(scenarioSchema as any);
-        //   project.simulatorHost?.rerender();
       };
 
       event.on('common:schema', async () => {
-        console.log('saveSchema', project.exportSchema(IPublicEnumTransformStage.Save), menuItem);
-        menuItem.query = JSON.stringify(project.exportSchema(IPublicEnumTransformStage.Save))
-        const {code,msg} = await actions.getState().updateMenu(menuItem);
-        if(code === 200){
-          message.success('保存成功')
-        }else{
-          message.error('保存失败')
+        // console.log('saveSchema', project.exportSchema(IPublicEnumTransformStage.Save), menuItem);
+        // setSchema(project.exportSchema(IPublicEnumTransformStage.Save))
+        if (!menuItemQuery) {
+          menuItemQuery = {}
+          
+        }
+        if(!menuItemQuery.lowcode){
+          menuItemQuery = {lowcode:{}}
+        }
+
+        menuItemQuery.lowcode.schema = project.exportSchema(IPublicEnumTransformStage.Save);
+        menuItem.query = menuItemQuery
+        // 保存前query属性转换为字符串
+        // menuItem.query = JSON.stringify(project.exportSchema(IPublicEnumTransformStage.Save));
+        const { code } = await actions.getState().updateMenu(menuItem);
+        if (code === 200) {
+          message.success('保存成功');
+        } else {
+          message.error('保存失败');
         }
       });
       // console.log('event',event);

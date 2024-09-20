@@ -1,3 +1,4 @@
+// 是否为json字符串
 export function isJSON(str) {
   if (typeof str === "string") {
     try {
@@ -6,5 +7,7 @@ export function isJSON(str) {
     } catch (e) {
       return false;
     }
+  }else{
+    return false;
   }
 }

@@ -293,7 +293,7 @@ const MenuForm: React.FC<MenuFormProps> = (props) => {
           <JsonEditor
             value={form.getFieldValue('query')}
             onChange={(e) => {
-              form.setFieldValue('query', JSON.stringify(e));
+                form.setFieldValue('query', JSON.stringify(e));
             }}
           ></JsonEditor>
         </ProForm.Item>
