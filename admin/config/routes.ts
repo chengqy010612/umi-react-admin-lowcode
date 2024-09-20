@@ -65,7 +65,7 @@ export default [
         path: '/system/role-auth/user/:id',
         component: './System/Role/authUser',
       },
-    ]
+    ],
   },
   {
     name: 'monitor',
@@ -76,7 +76,7 @@ export default [
         path: '/monitor/job-log/index/:id',
         component: './Monitor/JobLog',
       },
-    ]
+    ],
   },
   {
     name: 'tool',
@@ -92,35 +92,35 @@ export default [
         path: '/tool/gen/edit',
         component: './Tool/Gen/edit',
       },
-    ]
+    ],
   },
   {
     name: 'test',
     path: '/test',
     routes: [
-  //     {
-  //       name: 'test',
-  //       path: '/test/test',
-  //       component: '../components/PageRender/index.tsx',
-  //     },
-  //     {
-  //       name: '编辑表',
-  //       path: '/test/test',
-  //       component: './Tool/Gen/edit',
-  //     },
-    ]
+      //     {
+      //       name: 'test',
+      //       path: '/test/test',
+      //       component: '../components/PageRender/index.tsx',
+      //     },
+      //     {
+      //       name: '编辑表',
+      //       path: '/test/test',
+      //       component: './Tool/Gen/edit',
+      //     },
+    ],
   },
   {
     name: 'lowcode',
     path: '/lowcode',
-    routes: []
+    routes: [],
   },
-  // {
-  //   name: ' 低代码平台',
-  //   path: '/low-code-engine',
-  //   microApp: 'low-code-engine',
-  //   target: '_blank',
-  //   headerRender: false,
-  //   menuRender: false,
-  // },
+  {
+    name: ' 低代码平台',
+    path: '/lowcode/low-code-engine',
+    microApp: 'low-code-engine',
+    target: '_blank',
+    headerRender: false,
+    menuRender: false,
+  },
 ];

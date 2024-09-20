@@ -159,6 +159,7 @@ export function convertCompatRouters(childrens: API.RoutersMenuItem[]): any[] {
       ...extendProps,
     };
     if(item.component){
+      console.log(item.path,item.component);
       res.component = item.component
     }
     return res

@@ -158,7 +158,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
 export async function onRouteChange({ clientRoutes, location }) {
   const menus = getRemoteMenu();
   const route = matchRoutes(clientRoutes, location.pathname)?.pop()?.route
-  console.log('onRouteChange', clientRoutes, location, menus,route);
+  console.log('onRouteChange', clientRoutes, menus,route);
   if(menus === null && location.pathname !== PageEnum.LOGIN) {
     console.log('refresh')
     history.go(0);
