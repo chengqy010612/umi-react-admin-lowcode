@@ -3,7 +3,7 @@ import { getProjectSchema } from 'src/services/mockService';
 import './index.scss';
 
 import type { TreeDataNode } from 'antd';
-import { Tree } from 'antd';
+import { message, Tree } from 'antd';
 import actions from 'src/utils/state';
 // import { useModel } from 'umi';
 import { event } from '@alilc/lowcode-engine';
@@ -165,7 +165,12 @@ const PagesPlugin = (ctx: IPublicModelPluginContext) => {
       event.on('common:schema', async () => {
         console.log('saveSchema', project.exportSchema(IPublicEnumTransformStage.Save), menuItem);
         menuItem.query = JSON.stringify(project.exportSchema(IPublicEnumTransformStage.Save))
-        await actions.getState().updateMenu(menuItem);
+        const {code,msg} = await actions.getState().updateMenu(menuItem);
+        if(code === 200){
+          message.success('保存成功')
+        }else{
+          message.error('保存失败')
+        }
       });
       // console.log('event',event);
       // const masterProps = useModel('@@qiankunStateFromMaster');

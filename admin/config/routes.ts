@@ -47,9 +47,14 @@ export default [
     ],
   },
   {
-    name: 'system',
+    name: '系统管理',
     path: '/system',
     routes: [
+      {
+        name: '菜单管理',
+        path: '/system/menu',
+        component: './System/Menu',
+      },
       {
         name: '字典数据',
         path: '/system/dict-data/index/:id',

@@ -24,7 +24,7 @@ const SaveSamplePlugin = (ctx: IPublicModelPluginContext) => {
               // saveSchema(scenarioName);
             }}
           >
-            保存到本地
+            保存
           </Button>
         ),
       });
