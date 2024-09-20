@@ -106,6 +106,21 @@ https://umijs.org/docs/introduce/introduce
 ## 部署
 http://doc.ruoyi.vip/ruoyi-vue/document/hjbs.html#nginx%E9%85%8D%E7%BD%AE
 
+
+
+#### 页面设计
+
+![](https://github.com/chengqy010612/umi-react-admin-lowcode/blob/main/image/editor.png)
+
+![](https://github.com/chengqy010612/umi-react-admin-lowcode/blob/main/image/page1.png)
+
+如何创建一个页面？
+
+- 通过编辑器设计一个页面并保存
+- 菜单管理配置页面配置，组件路径填写 PageRender
+
+
+
 ## 演示图
 
 <table>
@@ -156,8 +171,3 @@ http://doc.ruoyi.vip/ruoyi-vue/document/hjbs.html#nginx%E9%85%8D%E7%BD%AE
 </table>
 
 
-#### 页面设计
-
-![](https://github.com/chengqy010612/umi-react-admin-lowcode/blob/main/image/editor.png)
-
-![](https://github.com/chengqy010612/umi-react-admin-lowcode/blob/main/image/page1.png)
