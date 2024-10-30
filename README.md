@@ -53,25 +53,27 @@
 
 Node：建议v16或以上
 
-pnpm i
+`pnpm i`
 
-pnpm run dev
+`pnpm run dev`
 
-Mock测试模式请运行: npm run start
+Mock测试模式请运行: `npm run start`
 
-发布打包请运行: npm run build
+发布打包请运行: `npm run build`
 
 
 
 如果要用到页面设计器需要启动low-code-engine项目
 
-yarn
+`yarn`
 
-yarn dev
+`yarn dev`
 
 
 
 后端请访问ruoyi开源项目
+
+-  需要初始化菜单sql文件
 
 ## 相关技术文档
 
