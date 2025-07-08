@@ -3,6 +3,7 @@
   "version": "6.0.0",
   "private": true,
   "description": "An out-of-box UI solution for enterprise applications",
+  "packageManager": "pnpm@8.15.5",
   "scripts": {
     "dev": "npm run start:dev",
     "build": "max build",
@@ -109,7 +110,7 @@
     "umi-presets-pro": "^2.0.0"
   },
   "engines": {
-    "node": ">=12.0.0"
+    "node": ">=18.0.0"
   },
   "create-umi": {
     "ignoreScript": [
