@@ -1,3 +1,5 @@
+
+
 ## 平台简介
 
   umi-react-admin-lowcode 是一套全部开源的快速开发平台,基于ruoyi-react项目，主项目(admin),子项目(low-code-engine)页面设计器，通过微前端(qiankun)集成
@@ -51,7 +53,7 @@
 
 ## 开发注意事项
 
-Node：建议v16或以上
+Node：建议v18或以上
 
 `pnpm i`
 
